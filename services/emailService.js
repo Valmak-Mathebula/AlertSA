@@ -7,7 +7,7 @@ export const sendVerificationEmail = async (email, token) => {
 
   try {
     const result = await resend.emails.send({
-      from: "Alert SA <onboarding@resend.dev>",
+      from: "Alert SA <noreply@alertssa.co.za>",
       to: email,
       subject: "Verify your Alert SA account",
       html: `
