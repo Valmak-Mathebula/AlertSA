@@ -19,16 +19,19 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendVerificationEmail = async (email, token) => {
-  const verificationLink = `http://localhost:5173/verify/${token}`;
+  const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 
-  await transporter.sendMail({
-    from: `"Alert SA" <${process.env.EMAIL_USER}>`,
+  const verificationLink = `${FRONTEND_URL}/verify/${token}`;
 
-    to: email,
+  try {
+    await transporter.sendMail({
+      from: `"Alert SA" <${process.env.EMAIL_USER}>`,
 
-    subject: "Verify your Alert SA account",
+      to: email,
 
-    html: `
+      subject: "Verify your Alert SA account",
+
+      html: `
 
         <h2>Welcome to Alert SA</h2>
 
@@ -56,5 +59,13 @@ export const sendVerificationEmail = async (email, token) => {
         <p>If you did not create this account, please ignore this email.</p>
 
         `,
-  });
+    });
+
+    console.log("Verification email sent successfully to:", email);
+  } catch (error) {
+    console.error("EMAIL ERROR:");
+    console.error(error);
+
+    throw error;
+  }
 };
