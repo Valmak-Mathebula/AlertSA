@@ -22,7 +22,8 @@
     "multer-storage-cloudinary": "^4.0.0",
     "mysql2": "^3.15.1",
     "nodemailer": "^7.0.6",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "resend": "^4.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
