@@ -92,12 +92,20 @@ export const getIncidents = async (req, res) => {
     'User' AS reported_by,
 
     (
-        SELECT media_url
-        FROM incident_media
-        WHERE incident_id = i.id
-        ORDER BY id
-        LIMIT 1
-    ) AS thumbnail,
+    SELECT media_url
+    FROM incident_media
+    WHERE incident_id = i.id
+    ORDER BY id
+    LIMIT 1
+) AS thumbnail,
+
+(
+    SELECT media_type
+    FROM incident_media
+    WHERE incident_id = i.id
+    ORDER BY id
+    LIMIT 1
+) AS thumbnail_type,
 
     (
         SELECT COUNT(*)
